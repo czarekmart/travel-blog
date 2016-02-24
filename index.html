@@ -22,6 +22,37 @@
 </head>
 <body>
 
+<!-------------------------- New Trip Dialog Box --------------------------------------->
+<div id="newTripModal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Add New Trip </h4>
+            </div>
+            <div class="modal-body">
+                <form class="form-inline">
+                    <div class="form-group form-group-sm">
+                        <label for="tripDate" class="sr-only">Trip Date:</label>
+                        <input type="date" id="tripDate" class="form-control" placeholder="Trip Date" required>
+                    </div>
+                    <div class="form-group form-group-sm">
+                        <label for="tripTitle" class="sr-only">Trip Title</label>
+                        <input type="text" id="tripTitle" class="form-control" placeholder="Trip Title" required>
+                    </div>
+                    <div class="form-group form-group-sm">
+                        <label for="tripLocation" class="sr-only">Trip Location</label>
+                        <input type="text" id="tripLocation" class="form-control" placeholder="Location" required>
+                    </div>
+                    <a id="enterTrip" class="btn btn-info btn-xs">Enter Trip</a>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!------------------------------- Navbar ------------------------------>
 <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
     <div class="container">
         <div class="navbar-header">
@@ -39,14 +70,25 @@
                 </li>
                 <li><a class="btn" id="openTripLink">
                     <span class="glyphicon glyphicon-folder-open"></span> Open Trip</a>
-                </li>            </ul>
+                </li>
+            </ul>
         </div>
     </div>
 </nav>
 
+<div class="container">
+
+    <header>
+        <h2 id="tripName"><span class="label label-success">Vancouver</span> </h2>
+    </header>
+</div>
+
 
 <script src="bower_components/jquery/dist/jquery.min.js"></script>
 <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+<script src="js/trip.js"></script>
 <script src="js/app.js"></script>
+
+
 </body>
 </html>
