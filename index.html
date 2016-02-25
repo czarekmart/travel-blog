@@ -33,6 +33,10 @@
             </div>
             <div class="modal-body">
                 <form class="form-inline">
+                    <div class="alert alert-danger" id="newTripAlert" hidden="hidden">
+                        <button type="button" class="close" data-hide="alert">&times;</button>
+                        <span>Please enter a valid trip name.</span>
+                    </div>
                     <div class="form-group form-group-sm">
                         <label for="tripDate" class="sr-only">Trip Date:</label>
                         <input type="date" id="tripDate" class="form-control" placeholder="Trip Date" required>
@@ -45,7 +49,7 @@
                         <label for="tripLocation" class="sr-only">Trip Location</label>
                         <input type="text" id="tripLocation" class="form-control" placeholder="Location" required>
                     </div>
-                    <a id="enterTrip" class="btn btn-info btn-xs">Enter Trip</a>
+                    <a id="enterTripButton" class="btn btn-info btn-xs">Enter Trip</a>
                 </form>
             </div>
         </div>
@@ -64,12 +68,22 @@
             </button>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
-            <ul class="nav navbar-nav navbar-left">
-                <li><a class="btn" id="newTripLink">
-                    <span class="glyphicon glyphicon-new-window"></span> New Trip</a>
+            <ul class="nav navbar-nav">
+                <li>
+                    <a href="#" class="navbar-left" id="newTripLink">
+                        <span class="glyphicon glyphicon-new-window"></span> New Trip
+                    </a>
                 </li>
-                <li><a class="btn" id="openTripLink">
-                    <span class="glyphicon glyphicon-folder-open"></span> Open Trip</a>
+                <li class="dropdown">
+                    <a class="dropdown-toggle" type="button" id="tripMenuToggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                        Trip
+                        <span class="caret"></span>
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="tripMenuToggle" id="tripMenu">
+                        <li><a href="#" data-tripid="Cezar1">Action</a></li>
+                        <li><a href="#" data-tripid="Cezar2">Another action</a></li>
+                        <li><a href="#" data-tripid="Cezar3">Something else</a></li>
+                    </ul>
                 </li>
             </ul>
         </div>
@@ -79,7 +93,7 @@
 <div class="container">
 
     <header>
-        <h2 id="tripName"><span class="label label-success">Vancouver</span> </h2>
+        <h2><label class="label label-success" id="tripName"></label> </h2>
     </header>
 </div>
 
@@ -88,7 +102,6 @@
 <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
 <script src="js/trip.js"></script>
 <script src="js/app.js"></script>
-
 
 </body>
 </html>

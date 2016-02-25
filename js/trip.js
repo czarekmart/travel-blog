@@ -47,9 +47,10 @@ function Trip(name, location, date, id) {
 
     }
 
-    var _currentId = 0;
     var _trips = makeUpTrips();
     var _maxId = 0;
+    var _currentTrip;
+
     for(var i = 0; i < _trips.length; i++) {
         if( _trips[i].id > _maxId ) _maxId = _trips[i].id;
     }
@@ -60,22 +61,34 @@ function Trip(name, location, date, id) {
             return _trips;
         },
         FindTripById: function(id) {
-            var x = _trips.find(function (elem) {
-                return elem.id == id;
-            });
-            return x;
+            var trip;
+            if(id) {
+                trip = _trips.find(function (elem) {
+                    return elem.id == id;
+                });
+            }
+            return trip;
         },
         AddTrip: function(trip) {
-            _currentId = ++_maxId;
-            var newTrip = new Trip(trip.name, trip.location, trip.date, _currentId);
+            var newTrip = new Trip(trip.name, trip.location, trip.date, ++_maxId);
             _trips.push(newTrip);
             return newTrip;
+        },
+        SetCurrentTrip: function(trip) {
+            _currentTrip = trip;
+            console.log("Current trip is", trip);
+            return this;
+        },
+        GetCurrentTrip: function() {
+            return _currentTrip;
         }
+
     };
 
     Trips.init.prototype = Trips.prototype;
 
     global.Trips = Trips;
+    global.$t = Trips();
 
 })(window);
 
