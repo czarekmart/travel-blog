@@ -19,6 +19,17 @@
 
 
     <![endif]-->
+
+    <style type="text/css">
+        #blogs p {
+            padding-top: 10px;
+            padding-left: 5px;
+            vertical-align: middle;
+        }
+        .img-responsive {
+            max-height: 400px;
+        }
+    </style>
 </head>
 <body>
 
@@ -93,13 +104,115 @@
 <div class="container">
 
     <header>
-        <h2><label class="label label-success" id="tripName"></label> </h2>
+        <h3><label class="label label-info" id="tripName"></label> </h3>
     </header>
+
+    <div id="blogs">
+
+        <!------------------------------------------------------------------>
+        <div class="row row-content">
+            <div class="col-xs-12 col-sm-7">
+                <img src="img/mtbaker1.jpg" class="img-responsive" alt="Mt. Baker Winterland">
+            </div>
+            <div class="col-xs-12 col-sm-5">
+                <p>Lorem ipsum dolor sit amet, non pellentesque adipiscing enim quisque, tellus nonummy adipiscing in nullam wisi lacus, donec interdum,
+                    mattis et pharetra sem. Sed ac commodo parturient, aliquam vestibulum etiam, metus neque tellus
+                    sed a, sed vel vel. Arcu urna vestibulum adipiscing mauris amet phasellus,
+                    donec turpis eu egestas elit nisl lorem, eu phasellus scelerisque elit ligula sapien nec.
+                    Et suspendisse, egestas eu nulla, suscipit sed ante quisquam laoreet enim,
+                    velit nec eros morbi pellentesque fermentum interdum,
+                    laoreet wisi quis turpis orci. Magna scelerisque sed, justo deleniti vel vel volutpat rutrum duis,
+                    vitae potenti justo sodales gravida arcu, ornare nec at amet enim neque,
+                    eleifend volutpat vitae metus sed sagittis.
+                </p>
+
+            </div>
+        </div>
+        <!------------------------------------------------------------------>
+        <div class="row row-content">
+            <div class="col-xs-12 col-sm-12">
+                <img src="img/shuksan1.jpg" class="img-responsive center-block" alt="Mt.Shuksan">
+            </div>
+         </div>
+        <!------------------------------------------------------------------>
+        <div class="row row-content">
+            <div class="col-xs-12 col-sm-5">
+                <p>Lorem ipsum dolor sit amet, non pellentesque adipiscing enim quisque, tellus nonummy adipiscing in nullam wisi lacus, donec interdum,
+                    mattis et pharetra sem. Sed ac commodo parturient, aliquam vestibulum etiam, metus neque tellus
+                    sed a, sed vel vel. Arcu urna vestibulum adipiscing mauris amet phasellus,
+                    donec turpis eu egestas elit nisl lorem, eu phasellus scelerisque elit ligula sapien nec.
+                    Et suspendisse, egestas eu nulla, suscipit sed ante quisquam laoreet enim,
+                    velit nec eros morbi pellentesque fermentum interdum,
+                    laoreet wisi quis turpis orci. Magna scelerisque sed, justo deleniti vel vel volutpat rutrum duis,
+                    vitae potenti justo sodales gravida arcu, ornare nec at amet enim neque,
+                    eleifend volutpat vitae metus sed sagittis.
+                </p>
+
+            </div>
+            <div class="col-xs-12 col-sm-7">
+                <img src="img/mtbaker1.jpg" class="img-responsive" alt="Mt. Baker Winterland">
+            </div>
+        </div>
+        <!------------------------------------------------------------------>
+        <div class="row row-content">
+            <div class="col-xs-12 col-sm-12">
+                <p>Lorem ipsum dolor sit amet, non pellentesque adipiscing enim quisque, tellus nonummy adipiscing in nullam wisi lacus, donec interdum,
+                    mattis et pharetra sem. Sed ac commodo parturient, aliquam vestibulum etiam, metus neque tellus
+                    sed a, sed vel vel. Arcu urna vestibulum adipiscing mauris amet phasellus,
+                    donec turpis eu egestas elit nisl lorem, eu phasellus scelerisque elit ligula sapien nec.
+                    Et suspendisse, egestas eu nulla, suscipit sed ante quisquam laoreet enim,
+                    velit nec eros morbi pellentesque fermentum interdum,
+                    laoreet wisi quis turpis orci. Magna scelerisque sed, justo deleniti vel vel volutpat rutrum duis,
+                    vitae potenti justo sodales gravida arcu, ornare nec at amet enim neque,
+                    eleifend volutpat vitae metus sed sagittis. Tristique augue vel lorem, mi interdum risus sed,
+                    in pulvinar, nisl hac quisque libero, non elit. Elementum vel urna penatibus cursus et tempor,
+                    duis purus, est nibh, convallis nulla nec fermentum erat. Sed viverra vestibulum gravida,
+                    tristique iaculis est ligula ullamcorper, nonummy pretium orci.
+                </p>
+
+            </div>
+        </div>
+        <!------------------------------------------------------------------>
+    </div>
+</div>
+
+<div class="container">
+    <h3><label class="label label-default">New Blog Entry</label> </h3>
+
+    <div id="blogForm" class="row row-content">
+        <form class="form-horizontal">
+
+            <div class="form-group">
+                <label for="imageUrl" class="col-sm-2 control-label">Image URL</label>
+                <div class="col-sm-10">
+                    <input type="url" class="form-control" id="imageUrl" placeholder="Image URL">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="blogText" class="col-sm-2 control-label">Blog Text</label>
+                <div class="col-sm-10">
+                    <textarea class="form-control" rows="6" id="blogText"></textarea>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-10" >
+                    <a id="enterBlogButton" class="btn btn-default">Enter</a>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="alert alert-danger col-sm-offset-2 col-sm-10" id="newBlogAlert" hidden="hidden">
+                    <button type="button" class="close" data-hide="alert">&times;</button>
+                    <span>Please enter a valid image url.</span>
+                </div>
+            </div>
+        </form>
+    </div>
 </div>
 
 
 <script src="bower_components/jquery/dist/jquery.min.js"></script>
 <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+<script src="bower_components/moment/moment.js"></script>
 <script src="js/trip.js"></script>
 <script src="js/app.js"></script>
 

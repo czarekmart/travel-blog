@@ -1,7 +1,11 @@
 $(function() {
     main();
 });
-
+//****************************************************
+function formatDate(date) {
+    var result = moment(date, "YYYYMMDD").format("MMM Do, YYYY");
+    return result;
+}
 //****************************************************
 function populateTripMenu() {
 
@@ -12,9 +16,9 @@ function populateTripMenu() {
 
     var ulHtml = '';
     var lastTrip;
-    $t.GetTrips().forEach(function(trip) {
+    $t.GetTrips().sort($t.TripComparer).forEach(function(trip) {
 
-        ulHtml += '<li><a href="#" data-tripid="' + trip.id + '">' + trip.name + ', ' + trip.date + '</a></li>';
+        ulHtml += '<li><a href="#" data-tripid="' + trip.id + '">' + trip.name + ', ' + formatDate(trip.date) + '</a></li>';
         lastTrip = trip;
     });
 
@@ -33,7 +37,7 @@ function populateTripMenu() {
 //****************************************************
 function selectTrip(trip) {
     if(trip) {
-        $('#tripName').html(trip.name + ', ' + trip.date);
+        $('#tripName').html(trip.name + ', ' + formatDate(trip.date));
         $t.SetCurrentTrip(trip);
     }
 }
@@ -61,14 +65,64 @@ function newTripButtonHandler(evt) {
         $alert.show();
     }
     else {
-        var trip = $t.AddTrip({date: date, name: title, location: location});
+        var internalDate = moment(date, "YYYY-MM-DD").format("YYYYMMDD");
+        var trip = $t.AddTrip({date: internalDate, name: title, location: location});
         populateTripMenu();
         selectTrip(trip);
         $('#newTripModal').modal('hide');
     }
-
 }
 
+//****************************************************
+function newBlogEntryHandler(evt) {
+
+    var $alert = $('#newBlogAlert');
+    var $span = $alert.find("span").first();
+
+    var imgUrl = $('#imageUrl').val();
+    var blogText = $('#blogText').val();
+
+    //var imgUrl1 = $("#imageUrl").text(someHtmlString);
+    alert("You entered: " + imgUrl + ": " + blogText);
+
+    // Note: you have to escape control characters when writing into labels
+    // Here is how:
+    // Option 1
+    // before:
+    // <div class="someClass">text</div>
+    /*
+    var someHtmlString = "<script>alert('hi!');</script>";
+
+    // set a DIV's text:
+    $("div.someClass").text(someHtmlString);
+    // after:
+    // <div class="someClass">&lt;script&gt;alert('hi!');&lt;/script&gt;</div>
+
+    // get the text in a string:
+    var escaped = $("<div>").text(someHtmlString).html();
+    // value:
+    // &lt;script&gt;alert('hi!');&lt;/script&gt;
+    */
+
+    // Option 2: http://stackoverflow.com/questions/24816/escaping-html-strings-with-jquery
+    /*
+    var entityMap = {
+        "&": "&amp;",
+        "<": "&lt;",
+        ">": "&gt;",
+        '"': '&quot;',
+        "'": '&#39;',
+        "/": '&#x2F;'
+    };
+
+    function escapeHtml(string) {
+        return String(string).replace(/[&<>"'\/]/g, function (s) {
+            return entityMap[s];
+        });
+
+    }
+       */
+}
 //****************************************************
 function main() {
 
@@ -88,6 +142,8 @@ function main() {
     });
 
     $('#enterTripButton').click(newTripButtonHandler);
+
+    $('#enterBlogButton').click(newBlogEntryHandler);
 
     selectTrip(populateTripMenu());
 }

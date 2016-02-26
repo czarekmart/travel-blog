@@ -81,6 +81,9 @@ function Trip(name, location, date, id) {
         },
         GetCurrentTrip: function() {
             return _currentTrip;
+        },
+        TripComparer: function(a,b) {
+            return (a.date < b.date) ? -1 : (a.date > b.date) ? 1 : (a.id- b.id);
         }
 
     };
@@ -97,9 +100,9 @@ function Trip(name, location, date, id) {
 function makeUpTrips() {
     var trips = [];
     trips.push(
-        new Trip('Oregon Dunes', "Coose Bay, Oregon", '2012/3/21', 67),
-        new Trip('Indian Wells', 'Palm Springs, CA', '2014/03/14', 87),
-        new Trip('Royal Caribbean Cruise', 'Western Caribbeans', '2013/07/02', 21));
+        new Trip('Oregon Dunes', "Coose Bay, Oregon", '20120321', 7),
+        new Trip('Indian Wells', 'Palm Springs, CA', '20140411', 8),
+        new Trip('Royal Caribbean Cruise', 'Western Caribbeans', '20130702', 21));
     return trips;
 };
 
