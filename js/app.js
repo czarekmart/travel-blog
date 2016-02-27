@@ -2,8 +2,11 @@ $(function() {
     main();
 });
 //****************************************************
-function formatDate(date) {
-    var result = moment(date, "YYYYMMDD").format("MMM Do, YYYY");
+function formatDate(date,format) {
+    if(!format) {
+        format = "MMM Do, YYYY";
+    }
+    var result = moment(date, "YYYYMMDD").format(format);
     return result;
 }
 //****************************************************
@@ -37,7 +40,65 @@ function populateTripMenu() {
 //****************************************************
 function selectTrip(trip) {
     if(trip) {
-        $('#tripName').html(trip.name + ', ' + formatDate(trip.date));
+        $('#nameHeader').text(trip.name);
+        $('#locationHeader').text(trip.location + ', ' + formatDate(trip.date, "MMMM Do, YYYY"));
+        // fill the blogs
+        var $blogs = $('#blogs');
+        $blogs.html('');    // clear first
+        if(trip.blogs) {
+            var imgOnLeft = true;
+            trip.blogs.forEach(function(blog){
+                if(blog.text || blog.imgUrl) {
+                    var $rowContent = $('<div class="row row-content"></div>');
+
+                    var $img, $p, $imgDiv, $textDiv;
+                    if(blog.imgUrl) {
+                        $img = $('<img src="' + blog.imgUrl + '" class="img-responsive">');
+                        if (blog.imgDesc) {
+                            $img.attr('alt', blog.imgDesc);
+                        }
+                    }
+                    if(blog.text) {
+                        $p = $('<p />');
+                        $p.text(blog.text);
+                    }
+
+                    if(blog.text && blog.imgUrl) {
+                        // text and blog
+                        $imgDiv = $('<div class="col-xs-12 col-sm-7"></div>');
+                        $textDiv = $('<div class="col-xs-12 col-sm-5"></div>');
+
+                        $imgDiv.append($img);
+                        $textDiv.append($p);
+
+                        if(imgOnLeft) {
+                            $rowContent.append($imgDiv);
+                            $rowContent.append($textDiv);
+                        }
+                        else {
+                            $rowContent.append($textDiv);
+                            $rowContent.append($imgDiv);
+                        }
+                        imgOnLeft = !imgOnLeft;
+                    }
+                    else if (blog.text) {
+                        // only text
+                        $textDiv = $('<div class="col-xs-12 col-sm-12"></div>');
+                        $textDiv.append($p);
+                        $rowContent.append($textDiv);
+                    }
+                    else {
+                        // only image
+                        $img.addClass('center-block'); // if it's only image then it needs to be centered
+                        $imgDiv = $('<div class="col-xs-12 col-sm-12"></div>');
+                        $imgDiv.append($img);
+                        $rowContent.append($imgDiv);
+                    }
+                    $blogs.append($rowContent);
+                }
+            });
+        }
+
         $t.SetCurrentTrip(trip);
     }
 }

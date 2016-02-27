@@ -27,14 +27,6 @@ function BlogImageEntry(imgUrl) {
 }
 BlogImageEntry.prototype = Object.create(BlogEntry.prototype);
 
-//============ Trip ===========================
-function Trip(name, location, date, id) {
-    this.id = id;
-    this.name = name;
-    this.location = location;
-    this.date = date;
-    this.entries = [];
-}
 
 //**********************************************
 (function (global) {
@@ -70,8 +62,12 @@ function Trip(name, location, date, id) {
             return trip;
         },
         AddTrip: function(trip) {
-            var newTrip = new Trip(trip.name, trip.location, trip.date, ++_maxId);
-            _trips.push(newTrip);
+            _trips.push({
+                trip: trip.name,
+                location: trip.location,
+                date: trip.date,
+                id: ++_maxId,
+            });
             return newTrip;
         },
         SetCurrentTrip: function(trip) {
@@ -98,11 +94,82 @@ function Trip(name, location, date, id) {
 
 
 function makeUpTrips() {
-    var trips = [];
-    trips.push(
-        new Trip('Oregon Dunes', "Coose Bay, Oregon", '20120321', 7),
-        new Trip('Indian Wells', 'Palm Springs, CA', '20140411', 8),
-        new Trip('Royal Caribbean Cruise', 'Western Caribbeans', '20130702', 21));
-    return trips;
+    return [
+        {
+            name: 'Oregon Dunes',
+            location: "Coose Bay, Oregon",
+            date: '20120321',
+            id: 7,
+        },
+        {
+            name: 'Indian Wells',
+            location: 'Palm Springs, CA',
+            date: '20140411',
+            id: 17,
+        },
+        {
+            name: 'Royal Caribbean Cruise',
+            location: "Western Caribbeans",
+            date: '20130702',
+            id: 3,
+        },
+        {
+            name: 'Mount Baker Skiing',
+            location: "Mount Baker Skiing Area",
+            date: '20130320',
+            id: 24,
+            blogs: [
+                {
+                    text: "" +
+                    "Lorem ipsum dolor sit amet, non pellentesque adipiscing enim quisque, tellus nonummy adipiscing in nullam wisi lacus, donec interdum, "+
+                    "mattis et pharetra sem. Sed ac commodo parturient, aliquam vestibulum etiam, metus neque tellus "+
+                    "sed a, sed vel vel. Arcu urna vestibulum adipiscing mauris amet phasellus, "+
+                    "donec turpis eu egestas elit nisl lorem, eu phasellus scelerisque elit ligula sapien nec. "+
+                    "Et suspendisse, egestas eu nulla, suscipit sed ante quisquam laoreet enim, "+
+                    "velit nec eros morbi pellentesque fermentum interdum, "+
+                    "laoreet wisi quis turpis orci. Magna scelerisque sed, justo deleniti vel vel volutpat rutrum duis, "+
+                    "vitae potenti justo sodales gravida arcu, ornare nec at amet enim neque, "+
+                    "eleifend volutpat vitae metus sed sagittis. ",
+
+                    imgUrl: "img/mtbaker1.jpg",
+                    imgDesc: 'Mount Baker Winterland',
+                },
+                {
+                    imgUrl: 'img/shuksan1.jpg',
+                    imgDesc: 'Mount Shuksan',
+                },
+                {
+                    text: "" +
+                    "Lorem ipsum dolor sit amet, non pellentesque adipiscing enim quisque, tellus nonummy adipiscing in nullam wisi lacus, donec interdum, "+
+                    "mattis et pharetra sem. Sed ac commodo parturient, aliquam vestibulum etiam, metus neque tellus "+
+                    "sed a, sed vel vel. Arcu urna vestibulum adipiscing mauris amet phasellus, "+
+                    "donec turpis eu egestas elit nisl lorem, eu phasellus scelerisque elit ligula sapien nec. "+
+                    "Et suspendisse, egestas eu nulla, suscipit sed ante quisquam laoreet enim, "+
+                    "velit nec eros morbi pellentesque fermentum interdum, "+
+                    "laoreet wisi quis turpis orci. Magna scelerisque sed, justo deleniti vel vel volutpat rutrum duis, "+
+                    "vitae potenti justo sodales gravida arcu, ornare nec at amet enim neque, "+
+                    "eleifend volutpat vitae metus sed sagittis. ",
+
+                    imgUrl: "img/mtbaker1.jpg",
+                    imgDesc: 'Mount Baker Winterland',
+                },
+                {
+                    text: ""+
+                    'Lorem ipsum dolor sit amet, non pellentesque adipiscing enim quisque, tellus nonummy adipiscing in nullam wisi lacus, donec interdum, '+
+                    'mattis et pharetra sem. Sed ac commodo parturient, aliquam vestibulum etiam, metus neque tellus '+
+                    'sed a, sed vel vel. "rcu urna vestibulum adipiscing mauris amet phasellus, '+
+                    'donec turpis eu egestas elit nisl lorem, eu phasellus scelerisque elit ligula sapien nec. '+
+                    'Et suspendisse, egestas eu nulla, suscipit sed ante quisquam laoreet enim, '+
+                    'velit nec eros morbi pellentesque fermentum interdum, '+
+                    'laoreet wisi quis turpis orci. Magna scelerisque sed, justo deleniti vel vel volutpat rutrum duis, '+
+                    'vitae potenti justo sodales gravida arcu, ornare nec at amet enim neque, '+
+                    'eleifend volutpat vitae metus sed sagittis. Tristique augue vel lorem, mi interdum risus sed, '+
+                    'in pulvinar, nisl hac quisque libero, non elit. Elementum vel urna penatibus cursus et tempor, '+
+                    'duis purus, est nibh, convallis nulla nec fermentum erat. Sed viverra vestibulum gravida, '+
+                    'tristique iaculis est ligula ullamcorper, nonummy pretium orci. '
+                },
+            ],
+        },
+    ];
 };
 
