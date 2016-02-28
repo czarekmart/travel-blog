@@ -9,6 +9,23 @@ function formatDate(date,format) {
     var result = moment(date, "YYYYMMDD").format(format);
     return result;
 }
+
+var entityMap = {
+    "&": "&amp;",
+    "<": "&lt;",
+    ">": "&gt;",
+    '"': '&quot;',
+    "'": '&#39;',
+    "/": '&#x2F;'
+};
+
+//****************************************************
+function escapeHtml(string) {
+    return String(string).replace(/[&<>"'\/]/g, function (s) {
+        return entityMap[s];
+    });
+}
+
 //****************************************************
 function populateTripMenu() {
 
@@ -38,10 +55,11 @@ function populateTripMenu() {
 }
 
 //****************************************************
-function selectTrip(trip) {
+function displayBlogs(trip) {
+    if(!trip) {
+        trip = $t.GetCurrentTrip();
+    }
     if(trip) {
-        $('#nameHeader').text(trip.name);
-        $('#locationHeader').text(trip.location + ', ' + formatDate(trip.date, "MMMM Do, YYYY"));
         // fill the blogs
         var $blogs = $('#blogs');
         $blogs.html('');    // clear first
@@ -98,7 +116,16 @@ function selectTrip(trip) {
                 }
             });
         }
+    }
 
+}
+
+//****************************************************
+function selectTrip(trip) {
+    if(trip) {
+        $('#nameHeader').text(trip.name);
+        $('#locationHeader').text(trip.location + ', ' + formatDate(trip.date, "MMMM Do, YYYY"));
+        displayBlogs(trip);
         $t.SetCurrentTrip(trip);
     }
 }
@@ -140,11 +167,39 @@ function newBlogEntryHandler(evt) {
     var $alert = $('#newBlogAlert');
     var $span = $alert.find("span").first();
 
-    var imgUrl = $('#imageUrl').val();
-    var blogText = $('#blogText').val();
+    var $imgUrl = $('#imageUrl').val();
+    var $blogText = $('#blogText').val();
+    var $imgDesc = $('#imageDesc').val();
+
+    if(!$t.GetCurrentTrip()) {
+        $span.text("No trip is currently selected.");
+        $alert.show();
+    }
+    else if(!$imgUrl && !$blogText) {
+        $span.text("Please enter image URL or/and blog text.");
+        $alert.show();
+    }
+    else if ( String($blogText).includes('<') ||
+                String($blogText).includes('>')  ||
+                String($imgDesc).includes('>') ||
+                String($imgDesc).includes('<')) {
+        $span.text("You blog text includes XSS unsafe characters.");
+        $alert.show();
+    }
+    else if ( String($imgUrl).includes('<') || String($imgUrl).includes('>')) {
+        $span.text("Invalid image URL");
+        $alert.show();
+    }
+    else {
+        $t.AddBlog({text:$blogText, imgUrl:$imgUrl, imgDesc:$imgDesc});
+        displayBlogs();
+        $('#imageUrl').val('');
+        $('#blogText').val('');
+        $('#imageDesc').val('');
+    }
 
     //var imgUrl1 = $("#imageUrl").text(someHtmlString);
-    alert("You entered: " + imgUrl + ": " + blogText);
+    //alert("You entered: " + imgUrl + ": " + blogText);
 
     // Note: you have to escape control characters when writing into labels
     // Here is how:
@@ -206,5 +261,13 @@ function main() {
 
     $('#enterBlogButton').click(newBlogEntryHandler);
 
-    selectTrip(populateTripMenu());
+    $t.LoadTrips(
+        function() {
+            selectTrip(populateTripMenu());
+        },
+        function(err) {
+            console.log("Failed to load trips: ", err.status, err.statusText );
+        });
+
+
 }
