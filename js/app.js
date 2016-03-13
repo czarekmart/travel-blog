@@ -197,47 +197,6 @@ function newBlogEntryHandler(evt) {
         $('#blogText').val('');
         $('#imageDesc').val('');
     }
-
-    //var imgUrl1 = $("#imageUrl").text(someHtmlString);
-    //alert("You entered: " + imgUrl + ": " + blogText);
-
-    // Note: you have to escape control characters when writing into labels
-    // Here is how:
-    // Option 1
-    // before:
-    // <div class="someClass">text</div>
-    /*
-    var someHtmlString = "<script>alert('hi!');</script>";
-
-    // set a DIV's text:
-    $("div.someClass").text(someHtmlString);
-    // after:
-    // <div class="someClass">&lt;script&gt;alert('hi!');&lt;/script&gt;</div>
-
-    // get the text in a string:
-    var escaped = $("<div>").text(someHtmlString).html();
-    // value:
-    // &lt;script&gt;alert('hi!');&lt;/script&gt;
-    */
-
-    // Option 2: http://stackoverflow.com/questions/24816/escaping-html-strings-with-jquery
-    /*
-    var entityMap = {
-        "&": "&amp;",
-        "<": "&lt;",
-        ">": "&gt;",
-        '"': '&quot;',
-        "'": '&#39;',
-        "/": '&#x2F;'
-    };
-
-    function escapeHtml(string) {
-        return String(string).replace(/[&<>"'\/]/g, function (s) {
-            return entityMap[s];
-        });
-
-    }
-       */
 }
 //****************************************************
 function main() {
