@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" ng-app="travelBlogApp">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-COMPATIBLE" content="IE=edge">
@@ -11,11 +11,11 @@
     <link href="bower_components/font-awesome/css/font-awesome.min.css" rel="stylesheet">
     <link href="css/mystyles.css" rel="stylesheet">
 
-    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!-- HTML5 shim and Respond.scripts for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.scripts doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
-    <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
-    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.scripts"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.scripts"></script>
 
 
     <![endif]-->
@@ -69,7 +69,7 @@
 
 <!------------------------------- Navbar ------------------------------>
 <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-    <div class="container">
+    <div class="container"  ng-controller="TripListController">
         <div class="navbar-header">
             <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
                 <span class="sr-only">Toggle navigation</span>
@@ -91,9 +91,7 @@
                         <span class="caret"></span>
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="tripMenuToggle" id="tripMenu">
-                        <li><a href="#" data-tripid="Cezar1">Action</a></li>
-                        <li><a href="#" data-tripid="Cezar2">Another action</a></li>
-                        <li><a href="#" data-tripid="Cezar3">Something else</a></li>
+                        <li ng-repeat="trip in trips"><a ng-href="#/{{ trip.id }}">{{ trip.name }}</a></li>
                     </ul>
                 </li>
             </ul>
@@ -103,128 +101,20 @@
 
 <div class="container">
 
-    <header>
-        <h3><label class="label label-info" id="nameHeader"></label> </h3>
-        <h4><span id="locationHeader"></span></h4>
-    </header>
+    <div ng-view></div>
 
-    <div id="blogs">
-
-        <!-- Just for sample --->
-        <div hidden="hidden">
-        <!------------------------------------------------------------------>
-        <div class="row row-content">
-            <div class="col-xs-12 col-sm-7">
-                <img src="img/mtbaker1.jpg" class="img-responsive" alt="Mt. Baker Winterland">
-            </div>
-            <div class="col-xs-12 col-sm-5">
-                <p>Lorem ipsum dolor sit amet, non pellentesque adipiscing enim quisque, tellus nonummy adipiscing in nullam wisi lacus, donec interdum,
-                    mattis et pharetra sem. Sed ac commodo parturient, aliquam vestibulum etiam, metus neque tellus
-                    sed a, sed vel vel. Arcu urna vestibulum adipiscing mauris amet phasellus,
-                    donec turpis eu egestas elit nisl lorem, eu phasellus scelerisque elit ligula sapien nec.
-                    Et suspendisse, egestas eu nulla, suscipit sed ante quisquam laoreet enim,
-                    velit nec eros morbi pellentesque fermentum interdum,
-                    laoreet wisi quis turpis orci. Magna scelerisque sed, justo deleniti vel vel volutpat rutrum duis,
-                    vitae potenti justo sodales gravida arcu, ornare nec at amet enim neque,
-                    eleifend volutpat vitae metus sed sagittis.
-                </p>
-
-            </div>
-        </div>
-        <!------------------------------------------------------------------>
-        <div class="row row-content">
-            <div class="col-xs-12 col-sm-12">
-                <img src="img/shuksan1.jpg" class="img-responsive center-block" alt="Mt.Shuksan">
-            </div>
-         </div>
-        <!------------------------------------------------------------------>
-        <div class="row row-content">
-            <div class="col-xs-12 col-sm-5">
-                <p>Lorem ipsum dolor sit amet, non pellentesque adipiscing enim quisque, tellus nonummy adipiscing in nullam wisi lacus, donec interdum,
-                    mattis et pharetra sem. Sed ac commodo parturient, aliquam vestibulum etiam, metus neque tellus
-                    sed a, sed vel vel. Arcu urna vestibulum adipiscing mauris amet phasellus,
-                    donec turpis eu egestas elit nisl lorem, eu phasellus scelerisque elit ligula sapien nec.
-                    Et suspendisse, egestas eu nulla, suscipit sed ante quisquam laoreet enim,
-                    velit nec eros morbi pellentesque fermentum interdum,
-                    laoreet wisi quis turpis orci. Magna scelerisque sed, justo deleniti vel vel volutpat rutrum duis,
-                    vitae potenti justo sodales gravida arcu, ornare nec at amet enim neque,
-                    eleifend volutpat vitae metus sed sagittis.
-                </p>
-
-            </div>
-            <div class="col-xs-12 col-sm-7">
-                <img src="img/mtbaker1.jpg" class="img-responsive" alt="Mt. Baker Winterland">
-            </div>
-        </div>
-        <!------------------------------------------------------------------>
-        <div class="row row-content">
-            <div class="col-xs-12 col-sm-12">
-                <p>Lorem ipsum dolor sit amet, non pellentesque adipiscing enim quisque, tellus nonummy adipiscing in nullam wisi lacus, donec interdum,
-                    mattis et pharetra sem. Sed ac commodo parturient, aliquam vestibulum etiam, metus neque tellus
-                    sed a, sed vel vel. Arcu urna vestibulum adipiscing mauris amet phasellus,
-                    donec turpis eu egestas elit nisl lorem, eu phasellus scelerisque elit ligula sapien nec.
-                    Et suspendisse, egestas eu nulla, suscipit sed ante quisquam laoreet enim,
-                    velit nec eros morbi pellentesque fermentum interdum,
-                    laoreet wisi quis turpis orci. Magna scelerisque sed, justo deleniti vel vel volutpat rutrum duis,
-                    vitae potenti justo sodales gravida arcu, ornare nec at amet enim neque,
-                    eleifend volutpat vitae metus sed sagittis. Tristique augue vel lorem, mi interdum risus sed,
-                    in pulvinar, nisl hac quisque libero, non elit. Elementum vel urna penatibus cursus et tempor,
-                    duis purus, est nibh, convallis nulla nec fermentum erat. Sed viverra vestibulum gravida,
-                    tristique iaculis est ligula ullamcorper, nonummy pretium orci.
-                </p>
-
-            </div>
-        </div>
-        <!------------------------------------------------------------------>
-        </div>
-    </div>
-</div>
-
-<div class="container">
-    <h3><label class="label label-default">New Blog Entry</label> </h3>
-
-    <div id="blogForm" class="row row-content">
-        <form class="form-horizontal">
-
-            <div class="form-group">
-                <label for="imageUrl" class="col-sm-2 control-label">Image URL</label>
-                <div class="col-sm-10">
-                    <input type="url" class="form-control" id="imageUrl" placeholder="Image URL">
-                </div>
-            </div>
-            <div class="form-group">
-                <label for="imageDesc" class="col-sm-2 control-label">Image Description</label>
-                <div class="col-sm-10">
-                    <input type="url" class="form-control" id="imageDesc" placeholder="Image Description">
-                </div>
-            </div>
-            <div class="form-group">
-                <label for="blogText" class="col-sm-2 control-label">Blog Text</label>
-                <div class="col-sm-10">
-                    <textarea class="form-control" rows="6" id="blogText"></textarea>
-                </div>
-            </div>
-            <div class="form-group">
-                <div class="col-sm-offset-2 col-sm-10" >
-                    <a id="enterBlogButton" class="btn btn-default">Enter</a>
-                </div>
-            </div>
-            <div class="form-group">
-                <div class="alert alert-danger col-sm-offset-2 col-sm-10" id="newBlogAlert" hidden="hidden">
-                    <button type="button" class="close" data-hide="alert">&times;</button>
-                    <span>Please enter a valid image url.</span>
-                </div>
-            </div>
-        </form>
-    </div>
 </div>
 
 
 <script src="bower_components/jquery/dist/jquery.min.js"></script>
 <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+<script src="bower_components/angular/angular.min.js"></script>
+<script src="bower_components/angular-route/angular-route.min.js"></script>
+<script src="bower_components/angular-resource/angular-resource.min.js"></script>
 <script src="bower_components/moment/moment.js"></script>
-<script src="js/trip.js"></script>
-<script src="js/app.js"></script>
+<script src="scripts/app.js"></script>
+<script src="scripts/controllers.js"></script>
+<script src="scripts/services.js"></script>
 
 </body>
 </html>

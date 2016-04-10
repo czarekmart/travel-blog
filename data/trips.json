@@ -2,25 +2,25 @@
   {
     "name": "Oregon Dunes",
     "location": "Coose Bay, Oregon",
-    "date": "20120321",
+    "date": "2012-03-21",
     "id": 7
   },
   {
     "name": "Indian Wells",
     "location": "Palm Springs, CA",
-    "date": "20140411",
+    "date": "2014-04-11",
     "id": 17
   },
   {
     "name": "Royal Caribbean Cruise",
     "location": "Western Caribbeans",
-    "date": "20130702",
+    "date": "2013-07-02",
     "id": 3
   },
   {
     "name": "Mount Baker Skiing",
     "location": "Mount Baker Skiing Area",
-    "date": "20130320",
+    "date": "2013-03-20",
     "id": 24,
     "blogs": [
       {
